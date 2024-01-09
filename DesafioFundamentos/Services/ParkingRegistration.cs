@@ -33,6 +33,7 @@ namespace DesafioFundamentos.Services
 
             RegisteredVehicles.Remove(record);
             record.RecordDeparture();
+            Console.WriteLine($"O veículo {record.Vehicle.LicensePlate} foi removido.");
 
             return record;
         }

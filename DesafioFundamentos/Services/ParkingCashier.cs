@@ -27,7 +27,6 @@ namespace DesafioFundamentos.Services
 
             decimal totalPrice = CalculateParkingPrice(parkingDuration);
 
-            Console.WriteLine($"O veículo {record.Vehicle.LicensePlate} foi removido.");
             Console.WriteLine($"Tempo estacionado: {parkingDuration}");
             Console.WriteLine($"Preço total: {totalPrice:C}.");
         }
