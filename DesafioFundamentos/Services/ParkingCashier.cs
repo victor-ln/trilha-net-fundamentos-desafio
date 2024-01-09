@@ -34,6 +34,7 @@ namespace DesafioFundamentos.Services
         public void ShowParkingHistory()
         {
             Console.WriteLine("Histórico de Veículos:");
+            decimal totalRevenue = 0m;
 
             foreach (var record in vehicleHistory)
             {
@@ -44,9 +45,10 @@ namespace DesafioFundamentos.Services
                 Console.Write($"Tempo Estacionado: {parkingDuration}, ");
                 Console.Write($"Preço pago: {parkingPrice:C}");
                 Console.WriteLine();
+                totalRevenue += parkingPrice;
             }
 
-            Console.WriteLine($"Total arrecadado: {CalculateTotalRevenue():C}");
+            Console.WriteLine($"Total arrecadado: {totalRevenue:C}");
         }
 
         private decimal CalculateParkingPrice(TimeSpan parkingDuration)
@@ -56,16 +58,6 @@ namespace DesafioFundamentos.Services
             );
 
             return initialPrice + (hoursParked * pricePerHour);
-        }
-
-        private decimal CalculateTotalRevenue()
-        {
-            return vehicleHistory.Sum(record =>
-            {
-                return CalculateParkingPrice(
-                    record.GetParkingDuration()
-                );
-            });
         }
     }
 }
