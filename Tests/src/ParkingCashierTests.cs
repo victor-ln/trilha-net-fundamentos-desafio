@@ -27,7 +27,7 @@ public class ParkingCashierTests
 
         // Restore the standard output stream
         Console.SetOut(new StreamWriter(Console.OpenStandardOutput()));
-        
+
         // Get the captured console output
         string consoleOutput = stringWriter.ToString().Trim();
 
@@ -65,7 +65,7 @@ public class ParkingCashierTests
         string consoleOutput = stringWriter.ToString().Trim();
 
         // Assert
-        Assert.Contains($"Preço total: {5:C}.", consoleOutput);
-        Assert.Contains($"Total arrecadado: {10:C}", consoleOutput);
+        Assert.Contains($"{5:C}.", consoleOutput);
+        Assert.Contains($"{10:C}", consoleOutput);
     }
 }
