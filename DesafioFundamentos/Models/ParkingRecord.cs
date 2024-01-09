@@ -4,6 +4,10 @@ namespace DesafioFundamentos.Models
     {
         public DateTime Entry { get; }
         public DateTime? Departure { get; private set; } = null;
+        public TimeSpan ParkingDuration
+        {
+            get => Departure.HasValue ? Departure.Value - Entry : DateTime.Now - Entry;
+        }
         public Vehicle Vehicle { get; }
 
         public ParkingRecord(Vehicle vehicle)
@@ -15,14 +19,6 @@ namespace DesafioFundamentos.Models
         public void RecordDeparture()
         {
             Departure ??= DateTime.Now;
-        }
-
-        public TimeSpan GetParkingDuration()
-        {
-            if (Departure is null)
-                return DateTime.Now - Entry;
-            else
-                return Departure.Value - Entry;
         }
 
         public int CompareTo(ParkingRecord other)

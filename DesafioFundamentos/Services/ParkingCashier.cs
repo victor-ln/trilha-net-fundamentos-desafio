@@ -23,7 +23,7 @@ namespace DesafioFundamentos.Services
         {
             vehicleHistory.Add(record);
 
-            TimeSpan parkingDuration = record.GetParkingDuration();
+            TimeSpan parkingDuration = record.ParkingDuration;
 
             decimal totalPrice = CalculateParkingPrice(parkingDuration);
 
@@ -33,22 +33,28 @@ namespace DesafioFundamentos.Services
 
         public void ShowParkingHistory()
         {
-            Console.WriteLine("Histórico de Veículos:");
-            decimal totalRevenue = 0m;
+            Console.WriteLine("| Veículo            | Horário de Entrada | Horário de Saída   | Tempo Estacionado  | Preço Pago         |");
+            Console.WriteLine("+--------------------+--------------------+--------------------+--------------------+--------------------+");
+
+            decimal totalRevenue = 0;
 
             foreach (var record in vehicleHistory)
             {
-                var parkingDuration = record.GetParkingDuration();
+                var parkingDuration = record.ParkingDuration;
                 var parkingPrice = CalculateParkingPrice(parkingDuration);
 
-                Console.Write($"Veículo: {record.Vehicle}, ");
-                Console.Write($"Tempo Estacionado: {parkingDuration}, ");
-                Console.Write($"Preço pago: {parkingPrice:C}");
-                Console.WriteLine();
+                Console.Write($"| {record.Vehicle.LicensePlate,-18} ");
+                Console.Write($"| {record.Entry,-18:HH:mm:ss} ");
+                Console.Write($"| {record.Departure,-18:HH:mm:ss} ");
+                Console.Write($"| {parkingDuration,-18:hh\\:mm\\:ss} ");
+                Console.Write($"| {parkingPrice,-18:C} |\n");
+
                 totalRevenue += parkingPrice;
             }
 
-            Console.WriteLine($"Total arrecadado: {totalRevenue:C}");
+            Console.WriteLine("+--------------------+--------------------+--------------------+--------------------+--------------------+");
+            Console.WriteLine($"| Total              |                    |                    |                    | {totalRevenue,-18:C} |");
+            Console.WriteLine("+--------------------+--------------------+--------------------+--------------------+--------------------+");
         }
 
         private decimal CalculateParkingPrice(TimeSpan parkingDuration)
